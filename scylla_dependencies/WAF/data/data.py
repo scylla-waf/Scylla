@@ -75,12 +75,11 @@ class DataEntry:
 
     def all(self, payload):
 
-        mayus = self.percentmayus()ayus(payload)
+        mayus = self.percentmayus(payload)
         minus = self.percentminus(payload)
         numbers = self.percentnumbers(payload)
         special = self.percentspecial(payload)
         entropy = self.getentropy(payload)
-        print("Added attack!")
         point = [mayus, minus, numbers, special, entropy]  # executed in "learn mode" ( all requests are attack )
 
         return point

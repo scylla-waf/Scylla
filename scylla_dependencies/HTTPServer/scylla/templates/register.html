@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+    <div class="container">
+        <h2>Registrar usuario</h2>
+
+        <img src="{% static 'logo.png' %}" alt="">
+        <form method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit">Registrar</button>
+        </form>
+
+
+        <a href="/login">Iniciar sesión</a>
+    </div>
+{% endblock %}

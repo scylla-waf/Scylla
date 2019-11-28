@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
 
-import seaborn as sns;
-
-sns.set()
+import seaborn as sns
 import numpy as np
 import pickle
 from sklearn.cluster import KMeans
@@ -14,16 +12,16 @@ class IntelligentDetect:
 
     def __init__(self):
         self.BAD = 0
+        self.DATASET_PATH = './scylla_dependencies/WAF/datasets/dataset_test.scy'
+        sns.set()
 
-    def indentify(self, payload):
+    def identify(self, payload):
         intelligence = DataEntry()
         new_point = intelligence.all(payload)
 
         kmeans = KMeans(n_clusters=2)
 
-        filename = './scylla_dependencies/WAF/datasets/dataset_test.scy'
-
-        f = open(filename, 'r')
+        f = open(self.DATASET_PATH, 'rb')
         chunk = f.read()
         f.close()
 
@@ -38,7 +36,7 @@ class IntelligentDetect:
 
         out_chunk = pickle.dumps(dataset)
 
-        f2 = open('./scylla_dependencies/WAF/datasets/dataset_test.scy', 'w')
+        f2 = open(self.DATASET_PATH, 'wb')
         f2.write(out_chunk)
         f2.close()
 

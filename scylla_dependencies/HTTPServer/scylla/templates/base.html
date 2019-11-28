@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scyla</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% if use.is_authenticated %}
+        <nav>
+            <ul>
+                <img src="{% static 'logo.png' %}" alt="" width="5%"> 
+                <a href="requests/"><li>Requests</li></a>    
+            </ul>
+            <a href="/logout" class="cerrar_sesion"><li>Log out</li></a>
+        </nav>
+    {% endif %}
+    {% block container %} {% endblock %}
+</body>
+</html>

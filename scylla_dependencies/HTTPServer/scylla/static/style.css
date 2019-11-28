@@ -1,0 +1,59 @@
+/* General */
+body{
+    background: #686894;
+    color: white;
+    margin: 0;
+}
+a{
+    color: white;
+}
+/* Register and login */
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container a{
+    color: white;
+    margin-top: 2%;
+}
+.container img{
+    width: 30%;
+}
+/* Index */
+.container2{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5% 2%;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: gray;
+    padding: 0 2%;
+}
+nav ul{
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+ul a li{
+    display: inline;
+}
+ul a{
+    margin-top: 1%;
+    margin-left: 3%;
+}
+nav a{
+    text-decoration: none;
+}
+.cerrar_sesion{
+    list-style: none;
+}

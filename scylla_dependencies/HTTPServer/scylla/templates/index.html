@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+    <nav>
+            <ul>
+                <img src="{% static 'logo.png' %}" alt="" width="5%"> 
+                <a href="requests/"><li>Requests</li></a>    
+            </ul>
+            <a href="/logout" class="cerrar_sesion"><li>Log out</li></a>
+        </nav>
+    <div class="container2">
+        
+        <h2>Welcome <b>{{request.user.username}}</b></h2>
+        <p>
+            Scylla Admin Panel, you can see statistics and change the configuration.
+        </p>
+    </div>
+{% endblock %}

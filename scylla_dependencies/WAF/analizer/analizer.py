@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 
+import string
 from scylla import Config
 from scylla_dependencies.WAF.parser.parsepetition import *  # parse GET, POST, get type of request...
 from urllib.parse import unquote
+from scylla_dependencies.WAF.intelligence.intelligence import *
+from scylla_dependencies.WAF.learn.trainAI import *
 
 class Analizer:
 
@@ -11,6 +14,40 @@ class Analizer:
         self.blacklist = self.parser.getarray("config/blacklist.conf")  # load blacklist
         self.config = Config()
         self.learn = learn  # should AI learn or detect ?
+        self.deffendbyAI = IntelligentDetect()
+        self.train = trainAI()
+
+    def AI(self, dict):
+        for i in dict:
+            if self.learn:
+                self.train.learn_from_petitions(dict[i])
+            else:
+                if self.deffendbyAI.identify(dict[i]):
+                    return True
+                else:
+                    return False
+    def variable_type(self, petition, dict,ip):
+        variable1 = self.config.getconfig("config/variables.conf")  # ex. {"id": "numeric', "lol":"string"}
+
+        numeric = variable1["numeric"]  # get numeric
+        string = variable1["string"]  # get string
+        strange = variable1["strange"]  # get strange
+
+        for key in dict:  # for each variable
+            if key in variable1:  # if variable in conf file
+                type = variable1[key]  # type is the value of variable in conf file
+                for i in dict[key]:
+                    if type == "numeric":
+                        testin = numeric
+                    elif type == "string":
+                        testin = string
+                    else:
+                        testin = strange
+                    if not str(i) in testin:
+                        self.log_attack(petition, "Used bad type in " + key, ip)
+                        return True  # blocked
+                return False
+
 
     def log_attack(self, petition, attack, ip):
         if "GET" in self.parser.get_method(petition):
@@ -66,20 +103,27 @@ class Analizer:
         return False
 
     def request_analysis(self, data, ip):  # start request analysis
+        if not self.learn:
 
-        if "GET" in self.parser.get_method(data):  # if GET
+            if "GET" in self.parser.get_method(data):  # if GET
 
-            get_data = data.decode("utf-8").split("\r\n")[:1]  # url decode
-            get_data = ''.join(get_data)
-            get_data = get_data.split("GET ")[1]
-            get_data = ''.join(get_data)
-            get_data = get_data.split(" ", 1)[0]  # returns url
+                get_data = data.decode("utf-8").split("\r\n")[:1]  # url decode
+                get_data = ''.join(get_data)
+                get_data = get_data.split("GET ")[1]
+                get_data = ''.join(get_data)
+                get_data = get_data.split(" ", 1)[0]  # returns url
 
-            data = data.replace(bytes(get_data, encoding="utf-8"), bytes(unquote(get_data), encoding="utf-8"))  # URL decode
-            if self.simple_analysis(data, self.parser.parse_get(data),ip): return True
+                data = data.replace(bytes(get_data, encoding="utf-8"), bytes(unquote(get_data), encoding="utf-8"))  # URL decode
+               # if self.AI(self.parser.parse_get(data)): return True
+                if self.variable_type(data,self.parser.parse_get(data),ip): return True
+                if self.simple_analysis(data, self.parser.parse_get(data),ip): return True
+            else:
+               # if self.AI(self.parser.parse_post(data)): return True
+                if self.variable_type(data, self.parser.parse_post(data),ip): return True
+                if self.simple_analysis(data, self.parser.parse_post(data), ip): return True
+                if self.verb_analysis(data, ip): return True  # if used a blocked verb...
         else:
-            if self.simple_analysis(data, self.parser.parse_post(data), ip): return True
-            if self.verb_analysis(data, ip): return True  # if used a blocked verb...
+            pass # analiza IA
 
     def response_analysis(self):  # main def to start response analysis
         pass

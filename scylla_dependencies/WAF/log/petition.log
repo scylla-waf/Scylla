@@ -1,0 +1,150 @@
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.64.1
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+
+Detected: '
+IP: 127.0.0.1
+Petition: lol='
+By User-Agent:  curl/7.66.0
+
+Detected: LOL method used 
+IP: 127.0.0.1
+Petition: b'LOL / HTTP/1.1\r\nHost: 127.0.0.1:4441\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+
+Detected: LOL method used 
+IP: 127.0.0.1
+Petition: b'LOL / HTTP/1.1\r\nHost: 127.0.0.1:4441\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: lol='
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: union
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=union HTTP/1.1']
+By User-Agent:  curl/7.66.0
+
+Detected: lol method used 
+IP: 127.0.0.1
+Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4441\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /?id=' HTTP/1.1"]
+By User-Agent:  curl/7.65.3
+
+Detected: '
+IP: 127.0.0.1
+Petition: ["GET /?id=' HTTP/1.1"]
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /?id=UNION HTTP/1.1']
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /?id=' HTTP/1.1"]
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /?id=SELECT HTTP/1.1']
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /?id=UNION HTTP/1.1']
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /?id=' HTTP/1.1"]
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: id=%27
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: id=UNION
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: id=lol
+By User-Agent:  curl/7.65.3
+
+Detected: aa method used 
+IP: 127.0.0.1
+Petition: b'aa / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.65.3\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.65.3
+
+Detected: aa method used 
+IP: 127.0.0.1
+Petition: b'aa /?id=UNION HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.65.3\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.65.3
+
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /?id=UNION HTTP/1.1']
+By User-Agent:  curl/7.65.3
+

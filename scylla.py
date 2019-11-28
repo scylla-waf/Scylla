@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import sys
+import sys, os
 from scylla_dependencies.colors.colourandwarnings import colours, alerts, errors
 from scylla_dependencies.proxy.proxy import *
 
@@ -25,9 +25,12 @@ class Config:  # handle .conf files
 
 def init():  # start main
     print(colourful.red + "Starting Scylla [Paranoid Firewall]" + colourful.end + "\n")
-    if sys.argv[1] is "learn":
-        learn = True
-    else:
+    try:
+        if sys.argv[1] is "learn":
+            learn = True
+        else:
+            learn = False
+    except:
         learn = False
     config = Config()  # instance of Config class
     options = config.getconfig("config/scylla.conf")
@@ -46,8 +49,32 @@ def init():  # start main
 
     try:
         pass
-        # print("Starting HTTP Server in {}:{}".format(options["HTTPhost"], options["HTTPport"]))  # start DJango ?
-        # startHTTP(options)
+        try:
+            print("Django Executed 127.0.0.1:{}".format(options["HTTPport"]))
+            #Install Django
+            command = 'pip3 install django > /dev/null'
+            os.system(command)
+            #Install django-secure
+            command = 'pip3 install django-secure > /dev/null'
+            os.system(command)
+            #Install django-sslserver
+            command = 'pip3 install django-sslserver > /dev/null'
+            os.system(command)
+            #Make Migrations
+            command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" makemigrations > /dev/null'
+            os.system(command)
+            #Migrate
+            command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" migrate > /dev/null'
+            os.system(command)
+            #Execute Django
+            command = 'nohup python3 "scylla_dependencies/HTTPServer/scylla/manage.py" runsslserver 127.0.0.1:' + options["HTTPport"] + '> /dev/null'
+            os.system(command)
+            # print("Starting HTTP Server in {}:{}".format(options["HTTPhost"], options["HTTPport"]))  # start DJango ?
+            # startHTTP(options)
+        except Exception as e:
+            print("Error starting Django")
+            print(e)
+            exit()
     except Exception as e:
         print("Error starting HTTP server")
         print(e)
