@@ -15,10 +15,10 @@ class Proxy:
         self.remote_addr = remote_addr
         self.rport = rport
         self.maxlength = int(maxlength)  # max legth of bytes received from server
-        self.CLIENT2SERVER = 0  # used as constant
+        self.CLIENT2SERVER = 0  # used as constant, data from client to server
         self.SERVER2CLIENT = 1
         self.analizer = Analizer()
-        self.parser = Parsepetition()
+        self.parser = Parsepetition()  # class used to parse petitions
 
     def receive_send_data(self, sock2, client, con_data):
         received = client.recv(1024)  # data from client (browser)

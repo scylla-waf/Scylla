@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 
-import sys, os
 import math
 import string
 
-class DataEntry:
 
+class DataEntry:
     charArray = list(string.ascii_lowercase)
 
-    def percentMayus(self, string):  # percent of mayus in string
+    def percentmayus(self, string):  # percent of mayus in string
         total_lenght = len(string)
         n = 0
         for i in string:
@@ -19,7 +18,7 @@ class DataEntry:
 
         return mayus
 
-    def percentMinus(self, string):  # percent of Minus in string
+    def percentminus(self, string):  # percent of Minus in string
         total_lenght = len(string)
         n = 0
         for i in string:
@@ -29,12 +28,12 @@ class DataEntry:
 
         return minus
 
-    def percentNumbers(self, string):  # percent of numbers in string
+    def percentnumbers(self, string):  # percent of numbers in string
         total_lenght = len(string)
         n = 0
         for i in string:
             numStr = ''
-            for n in range(1,11):
+            for n in range(1, 11):
                 numStr += str(n)
             if i in numStr:
                 n += 1
@@ -42,15 +41,15 @@ class DataEntry:
 
         return num
 
-    def percentSpecial(self, string):  # percent of special characters
+    def percentspecial(self, string):  # percent of special characters
         total_lenght = len(string)
         n = 0
-        charStr = '' 
+        charStr = ''
         for x in self.charArray:
             charStr += x.upper()
         for i in string:
             numStr = ''
-            for n in range(1,11):
+            for n in range(1, 11):
                 numStr += str(n)
             if not i in charStr and not i in self.charArray and not i in numStr:
                 n += 1
@@ -58,7 +57,7 @@ class DataEntry:
 
         return special
 
-    def getEntropy(self, string):  # get entropy of string
+    def getentropy(self, string):  # get entropy of string
         strSize = len(string)
         freqList = [0] * strSize
         for b in range(256):
@@ -73,15 +72,15 @@ class DataEntry:
                 ent = ent + (freq * math.log(freq, 2))
 
         return -ent
-        
+
     def all(self, payload):
-    
-        mayus = self.percentMayus(payload)
-        minus = self.percentMinus(payload)
-        numbers = self.percentNumbers(payload)
-        special = self.percentSpecial(payload)
-        entropy = self.getEntropy(payload)
-        
-        point = [mayus, minus, numbers, special, entropy]
-        
+
+        mayus = self.percentmayus()ayus(payload)
+        minus = self.percentminus(payload)
+        numbers = self.percentnumbers(payload)
+        special = self.percentspecial(payload)
+        entropy = self.getentropy(payload)
+        print("Added attack!")
+        point = [mayus, minus, numbers, special, entropy]  # executed in "learn mode" ( all requests are attack )
+
         return point
