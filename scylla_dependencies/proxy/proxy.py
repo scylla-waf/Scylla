@@ -9,7 +9,7 @@ from scylla_dependencies.WAF.parser.parsepetition import *
 class Proxy:
 
     def __init__(self, local_addr, lport, remote_addr, rport,
-                 maxlength):  # constructor, proxy and server connection info
+                 maxlength, learn):  # constructor, proxy and server connection info
         self.local_addr = local_addr
         self.lport = lport
         self.remote_addr = remote_addr
@@ -17,7 +17,7 @@ class Proxy:
         self.maxlength = int(maxlength)  # max legth of bytes received from server
         self.CLIENT2SERVER = 0  # used as constant, data from client to server
         self.SERVER2CLIENT = 1
-        self.analizer = Analizer()
+        self.analizer = Analizer(learn)
         self.parser = Parsepetition()  # class used to parse petitions
 
     def receive_send_data(self, sock2, client, con_data):

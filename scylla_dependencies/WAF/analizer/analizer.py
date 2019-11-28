@@ -6,10 +6,11 @@ from urllib.parse import unquote
 
 class Analizer:
 
-    def __init__(self):
+    def __init__(self, learn):
         self.parser = Parsepetition()
         self.blacklist = self.parser.getarray("config/blacklist.conf")  # load blacklist
         self.config = Config()
+        self.learn = learn  # should AI learn or detect ?
 
     def log_attack(self, petition, attack, ip):
         if "GET" in self.parser.get_method(petition):

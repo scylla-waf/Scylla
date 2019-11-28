@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import sys
 from scylla_dependencies.colors.colourandwarnings import colours, alerts, errors
 from scylla_dependencies.proxy.proxy import *
 
@@ -24,11 +25,14 @@ class Config:  # handle .conf files
 
 def init():  # start main
     print(colourful.red + "Starting Scylla [Paranoid Firewall]" + colourful.end + "\n")
-
+    if sys.argv[1] is "learn":
+        learn = True
+    else:
+        learn = False
     config = Config()  # instance of Config class
     options = config.getconfig("config/scylla.conf")
     proxy = Proxy(options["proxyhost"], options["proxyport"], options["server_addr"], options["server_port"],
-                  options["maxlength"])  # instance of Proxy class
+                  options["maxlength"], learn)  # instance of Proxy class
 
     try:
         print("[*] Starting Proxy Server in {}:{}".format(options["proxyhost"], options["proxyport"]))
