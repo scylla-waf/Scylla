@@ -66,7 +66,7 @@ class Analizer:
             f.writelines("IP: " + str(ip) + "\n")
             f.writelines("Petition: " + str(parameters) + "\n")
             f.writelines("By User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
-            f.writelines("\n\n")
+            f.writelines("\n*\n")
 
     def simple_analysis(self, petition, getorpost, ip):  # first blacklist analysis
         for i in getorpost:

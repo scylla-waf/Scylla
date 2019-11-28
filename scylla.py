@@ -67,7 +67,7 @@ def init():  # start main
             command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" migrate > /dev/null'
             os.system(command)
             #Execute Django
-            command = 'nohup python3 "scylla_dependencies/HTTPServer/scylla/manage.py" runsslserver 127.0.0.1:' + options["HTTPport"] + '> /dev/null'
+            command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" runsslserver 127.0.0.1:' + options["HTTPport"] + ' > /dev/null 2>&1'
             os.system(command)
             # print("Starting HTTP Server in {}:{}".format(options["HTTPhost"], options["HTTPport"]))  # start DJango ?
             # startHTTP(options)
