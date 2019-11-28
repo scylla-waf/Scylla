@@ -6,8 +6,7 @@ import seaborn as sns; sns.set()
 import numpy as np
 import pickle
 from sklearn.cluster import KMeans
-
-from scylla_dependencies.WAF.data import *
+from scylla_dependencies.WAF.data.data import *
 
 
 class IntelligentDetect:

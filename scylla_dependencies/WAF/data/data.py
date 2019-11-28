@@ -71,8 +71,8 @@ class DataEntry:
         for freq in freqList:
             if freq > 0:
                 ent = ent + (freq * math.log(freq, 2))
-        ent = -ent
-        return ent
+
+        return -ent
         
     def all(self, payload):
     
