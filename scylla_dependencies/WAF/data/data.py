@@ -12,7 +12,8 @@ class DataEntry:
         total_lenght = len(string)
         n = 0
         for i in string:
-            if i in self.charArray.upper():
+            i = i.upper()
+            if i in self.charArray:
                 n += 1
         mayus = (100 * n) / total_lenght
 
@@ -32,7 +33,10 @@ class DataEntry:
         total_lenght = len(string)
         n = 0
         for i in string:
-            if i in range(1,11):
+            numStr = ''
+            for n in range(1,11):
+                numStr += str(n)
+            if i in numStr:
                 n += 1
         num = (100 * n) / total_lenght
 
@@ -41,8 +45,14 @@ class DataEntry:
     def percentSpecial(self, string):  # percent of special characters
         total_lenght = len(string)
         n = 0
+        charStr = '' 
+        for x in self.charArray:
+            charStr += x.upper()
         for i in string:
-            if not i in self.charArray.upper() and not i in self.charArray and not i in range(1,11):
+            numStr = ''
+            for n in range(1,11):
+                numStr += str(n)
+            if not i in charStr and not i in self.charArray and not i in numStr:
                 n += 1
         special = (100 * n) / total_lenght
 
@@ -63,3 +73,15 @@ class DataEntry:
                 ent = ent + (freq * math.log(freq, 2))
         ent = -ent
         return ent
+        
+    def all(self, payload):
+    
+        mayus = self.percentMayus(payload)
+        minus = self.percentMinus(payload)
+        numbers = self.percentNumbers(payload)
+        special = self.percentSpecial(payload)
+        entropy = self.getEntropy(payload)
+        
+        point = [mayus, minus, numbers, special, entropy]
+        
+        return point
