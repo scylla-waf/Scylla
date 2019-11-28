@@ -32,7 +32,6 @@ class Proxy:
         else:  # if not parameters, does not analyse
             sock2.send(received)  # send to server
             out = sock2.recv(self.maxlength)  # received from server
-            print("OUT: " + str(len(out)))
             client.send(out)  # send to client ( browser )
             client.close()
 
