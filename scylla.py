@@ -2,6 +2,7 @@
 
 import os
 import sys
+from django.core.management.utils import get_random_secret_key
 
 from scylla_dependencies.colors.colourandwarnings import colours, alerts, errors
 from scylla_dependencies.proxy.proxy import *
@@ -38,7 +39,15 @@ def init():  # start main
     options = config.getconfig("config/scylla.conf")
     proxy = Proxy(options["proxyhost"], options["proxyport"], options["server_addr"], options["server_port"],
                   options["maxlength"], learn)  # instance of Proxy class
-
+    if options["secret_key"] == "SECRET_KEY":
+        lines = []
+        with open('config/scylla.conf') as infile:
+            for line in infile:
+                line = line.replace("SECRET_KEY", "'" + get_random_secret_key() + "'")
+                lines.append(line)
+        with open('config/scylla.conf', 'w') as outfile:
+            for line in lines:
+                outfile.write(line)
     try:
         print("[*] Starting Proxy Server in {}:{}".format(options["proxyhost"], options["proxyport"]))
         t = threading.Thread(target=proxy.startproxy, args=())
