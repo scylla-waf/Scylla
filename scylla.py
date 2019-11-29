@@ -51,15 +51,6 @@ def init():  # start main
         pass
         try:
             print("Django Executed 127.0.0.1:{}".format(options["HTTPport"]))
-            #Install Django
-            command = 'pip3 install django > /dev/null'
-            os.system(command)
-            #Install django-secure
-            command = 'pip3 install django-secure > /dev/null'
-            os.system(command)
-            #Install django-sslserver
-            command = 'pip3 install django-sslserver > /dev/null'
-            os.system(command)
             #Make Migrations
             command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" makemigrations > /dev/null'
             os.system(command)
@@ -69,8 +60,6 @@ def init():  # start main
             #Execute Django
             command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" runsslserver 127.0.0.1:' + options["HTTPport"] + ' > /dev/null 2>&1'
             os.system(command)
-            # print("Starting HTTP Server in {}:{}".format(options["HTTPhost"], options["HTTPport"]))  # start DJango ?
-            # startHTTP(options)
         except Exception as e:
             print("Error starting Django")
             print(e)
