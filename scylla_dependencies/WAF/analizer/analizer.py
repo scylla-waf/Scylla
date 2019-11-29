@@ -7,7 +7,7 @@ from scylla import Config
 from scylla_dependencies.WAF.intelligence.intelligence import *
 from scylla_dependencies.WAF.learn.trainAI import *
 from scylla_dependencies.WAF.parser.parsepetition import *  # parse GET, POST, get type of request...
-
+from scylla_dependencies.colors.colourandwarnings import *
 
 class Analizer:
 
@@ -18,6 +18,7 @@ class Analizer:
         self.learn = learn  # should AI learn or detect ?
         self.deffendbyAI = IntelligentDetect()
         self.train = trainAI()
+        colourful = colours()
 
     def AI(self, dict):
         for i in dict:
@@ -59,7 +60,7 @@ class Analizer:
         else:
             parameters = petition
 
-        print("Blocked: " + str(attack))
+        print("\nBlocked: " + colourful.red +str(attack) + colourful.end)
         print("IP: " + str(ip))
         try:
             print("User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))

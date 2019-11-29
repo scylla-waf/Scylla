@@ -416,3 +416,23 @@ IP: 127.0.0.1
 Petition: ['GET /index.php?id=199826349974444444444&pepe=joseasdsd872349862458364258972364589764235897623498576238946598237465982345 HTTP/1.1']
 By User-Agent:  curl/7.66.0
 *
+Detected: '199826367898765456789098765678909876567876543456787654345678765435678' is too big, average: 10 digits
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=199826367898765456789098765678909876567876543456787654345678765435678 HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in name
+IP: 127.0.0.1
+Petition: ['GET /index.php?name=346 HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in name
+IP: 127.0.0.1
+Petition: ['GET /index.php?name=* HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in name
+IP: 127.0.0.1
+Petition: ['GET /index.php?name=* HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
