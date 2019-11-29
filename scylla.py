@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-import sys, os
+import os
+import sys
+
 from scylla_dependencies.colors.colourandwarnings import colours, alerts, errors
 from scylla_dependencies.proxy.proxy import *
 
@@ -51,14 +53,15 @@ def init():  # start main
         pass
         try:
             print("Django Executed 127.0.0.1:{}".format(options["HTTPport"]))
-            #Make Migrations
+            # Make Migrations
             command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" makemigrations > /dev/null'
             os.system(command)
-            #Migrate
+            # Migrate
             command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" migrate > /dev/null'
             os.system(command)
-            #Execute Django
-            command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" runsslserver 127.0.0.1:' + options["HTTPport"] + ' > /dev/null 2>&1'
+            # Execute Django
+            command = 'python3 "scylla_dependencies/HTTPServer/scylla/manage.py" runsslserver 127.0.0.1:' + options[
+                "HTTPport"] + ' > /dev/null 2>&1'
             os.system(command)
         except Exception as e:
             print("Error starting Django")

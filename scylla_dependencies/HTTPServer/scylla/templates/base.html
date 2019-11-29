@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    {% if user.is_authenticated %}
-        <nav>
-            <div class="left">
-                <img src="{% static 'logo.png' %}" alt="" width="5%"> 
-                <span><a href="/index.html">Requests</a></span>
-                <span><a href="config">Config</a></span>
-            </div>
-            <a href="/logout" class="logout"><li>Log out</li></a>
-        </nav>
-    {% endif %}
-    {% block container %} {% endblock %}
+{% if user.is_authenticated %}
+<nav>
+    <div class="left">
+        <img src="{% static 'logo.png' %}" alt="" width="5%">
+        <span><a href="/index.html">Requests</a></span>
+        <span><a href="config">Config</a></span>
+    </div>
+    <a href="/logout" class="logout">
+        <li>Log out</li>
+    </a>
+</nav>
+{% endif %}
+{% block container %} {% endblock %}
 </body>
 </html>

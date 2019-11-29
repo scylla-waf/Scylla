@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
 
-import seaborn as sns
-import numpy as np
 import pickle
+
+import numpy as np
+import seaborn as sns
 from sklearn.cluster import KMeans
+
 from scylla_dependencies.WAF.data.data import *
 
 

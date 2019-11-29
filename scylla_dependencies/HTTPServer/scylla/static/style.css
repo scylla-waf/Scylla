@@ -97,7 +97,7 @@ nav .left span{
     justify-content: center;
 }
 form{
-    width: 20%;
+    width: 30%;
     margin-top: 5%;
 }
 form p{
@@ -114,5 +114,7 @@ form input[type=submit]{
 }
 .forms input{
     border-radius: 5%;
-
+}
+#id_secret_key{
+    width: 50%;
 }

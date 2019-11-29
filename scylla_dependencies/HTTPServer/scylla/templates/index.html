@@ -17,6 +17,7 @@
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
     chart.draw(data, options);
   }
+
 </script>
 <script type="text/javascript">
   google.charts.load("current", {packages:["corechart"]});
@@ -35,38 +36,39 @@
     var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
     chart.draw(data, options);
   }
+
 </script>
 <div class="container2">
     <div class="left_side">
         <h2>Bad Petitions</h2>
         <div class="all_petitions">
-          <div class="petitions">
-              <span>Host</span>
-              <span>Petition</span>
-              <span>User Agent</span>
-          </div>
-              {% for petition in petitions %}
-                <div class="petitions">
-                    <span>{{petition.ip}}</span>
-                    <span>{{petition.petition}}</span>
-                    <span>{{petition.detection}}</span>
-                </div>
-              {% endfor %}
+            <div class="petitions">
+                <span>Host</span>
+                <span>Petition</span>
+                <span>User Agent</span>
+            </div>
+            {% for petition in petitions %}
+            <div class="petitions">
+                <span>{{petition.ip}}</span>
+                <span>{{petition.petition}}</span>
+                <span>{{petition.detection}}</span>
+            </div>
+            {% endfor %}
         </div>
 
         <div class="pagination">
             {% if petitions.has_previous %}
             <a href="?page={{ petitions.previous_page_number }}">Anterior</a>
             {% endif %}
-            
+
             <span>{{ petitions.number }}</span>
             <span">de</span>
             <span>{{ petitions.paginator.num_pages }}</span>
-            
+
             {% if petitions.has_next %}
             <a href="?page={{ petitions.next_page_number }}">Siguiente</a>
             {% endif %}
-        </div> 
+        </div>
     </div>
 
     <div class="right_side">

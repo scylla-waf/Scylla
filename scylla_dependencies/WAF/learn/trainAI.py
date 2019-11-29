@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-import seaborn as sns
-import numpy as np
 import pickle
+
+import numpy as np
+import seaborn as sns
+
 from scylla_dependencies.WAF.data.data import *
 
 
@@ -13,7 +15,6 @@ class trainAI:
         sns.set()
 
     def add(self, payload):
-
         learn = DataEntry()
         new_point = learn.all(payload)
 

@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 
-from urllib.parse import unquote
 import ast  # for eval() dict
+from urllib.parse import unquote
 
 from scylla import Config
 from scylla_dependencies.WAF.intelligence.intelligence import *
 from scylla_dependencies.WAF.learn.trainAI import *
 from scylla_dependencies.WAF.parser.parsepetition import *  # parse GET, POST, get type of request...
 from scylla_dependencies.colors.colourandwarnings import *
+
 
 class Analizer:
 
@@ -63,7 +64,7 @@ class Analizer:
             parameters.decode("utf-8")
         except:
             pass
-        print("\nBlocked: " + colourful.red +str(attack) + colourful.end)
+        print("\nBlocked: " + colourful.red + str(attack) + colourful.end)
         print("IP: " + str(ip))
         try:
             print("User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
@@ -122,7 +123,7 @@ class Analizer:
                 # if self.AI(self.parser.parse_get(data)): return True
                 if self.variable_type(data, self.parser.parse_get(data), ip): return True
                 if self.simple_analysis(data, self.parser.parse_get(data), ip): return True
-                if self.blockByLen(data, self.parser.parse_get(data),ip): return True
+                if self.blockByLen(data, self.parser.parse_get(data), ip): return True
             else:
                 # if self.AI(self.parser.parse_post(data)): return True
                 if self.variable_type(data, self.parser.parse_post(data), ip): return True

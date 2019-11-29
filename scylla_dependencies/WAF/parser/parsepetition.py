@@ -63,4 +63,4 @@ class Parsepetition:
             variable = ''.join(variable)
             parameter = variable.split("=")
             data[parameter[0]] = parameter[1]
-        return data 
+        return data
