@@ -59,7 +59,10 @@ class Analizer:
             parameters = petition.decode("utf-8").split("\r\n")[-1]
         else:
             parameters = petition
-
+        try:
+            parameters.decode("utf-8")
+        except:
+            pass
         print("\nBlocked: " + colourful.red +str(attack) + colourful.end)
         print("IP: " + str(ip))
         try:
