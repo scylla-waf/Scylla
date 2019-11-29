@@ -26,6 +26,7 @@ class Analizer:
                     return True
                 else:
                     return False
+
     def variable_type(self, petition, dict,ip):
         variable1 = self.config.getconfig("config/variables.conf")  # ex. {"id": "numeric', "lol":"string"}
 
@@ -56,16 +57,23 @@ class Analizer:
             parameters = petition.decode("utf-8").split("\r\n")[-1]
         else:
             parameters = petition
+
         print("Blocked: " + str(attack))
         print("IP: " + str(ip))
-        print("User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
+        try:
+            print("User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
+        except:
+            pass
         print("Petition: " + str(parameters))
 
         with open("scylla_dependencies/WAF/log/petition.log", "a") as f:
             f.writelines("Detected: " + str(attack) + "\n")
             f.writelines("IP: " + str(ip) + "\n")
             f.writelines("Petition: " + str(parameters) + "\n")
-            f.writelines("By User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
+            try:
+                f.writelines("By User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
+            except:
+                f.writelines("By User-Agent: Cant Detect UA")
             f.writelines("\n*\n")
 
     def simple_analysis(self, petition, getorpost, ip):  # first blacklist analysis
@@ -85,7 +93,6 @@ class Analizer:
                     self.log_attack(petition, "Blocked IP", ip)
                     return True
             return False
-
 
 
     def verb_analysis(self, petition, ip):  # petition is raw
@@ -123,6 +130,10 @@ class Analizer:
     def response_analysis(self):  # main def to start response analysis
         pass
 
+    def savepetition(self, file, method):
+        with open(file, "a+") as f:
+            f.writelines("," + method)
+
     def scylla(self, received, conn_type, con_data):  # main def of firewall
 
         blocked = self.config.getconfig("scylla_dependencies/WAF/waf.conf")["replace"].split(
@@ -133,9 +144,11 @@ class Analizer:
 
         if conn_type is 0:  # analyze petitions
             # if bad return / else return normal petition
-            return received if not self.request_analysis(received, con_data[0]) else bytes(
-                "GET / HTTP/1.1\r\nHost: 127.0.0.1:4440\r\nUser-Agent: curl/7.64.0\r\nAccept: */*\r\n\r\n",
-                encoding='utf8')  # if True ( blocked ) return /
+            if not self.request_analysis(received, con_data[0]):
+                self.savepetition("scylla_dependencies/WAF/log/good.log", self.parser.get_method(received))
+                return received
+            else:
+                return bytes("GET / HTTP/1.1\r\nHost: 127.0.0.1:4440\r\nUser-Agent: curl/7.64.0\r\nAccept: */*\r\n\r\n",encoding='utf8')  # if True ( blocked ) return /
 
         else:  # analyze response
             return received  # response analysis

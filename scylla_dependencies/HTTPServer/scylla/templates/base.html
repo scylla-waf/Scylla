@@ -3,16 +3,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Scyla</title>
+    <title>Scylla</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    {% if use.is_authenticated %}
+    {% if user.is_authenticated %}
         <nav>
-            <ul>
+            <div class="left">
                 <img src="{% static 'logo.png' %}" alt="" width="5%"> 
-                <a href="requests/"><li>Requests</li></a>    
-            </ul>
+                <span>Welcome {{request.user.username}}</span>
+            </div>
             <a href="/logout" class="cerrar_sesion"><li>Log out</li></a>
         </nav>
     {% endif %}

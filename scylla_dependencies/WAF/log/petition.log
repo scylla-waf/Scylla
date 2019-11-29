@@ -223,3 +223,108 @@ IP: 127.0.0.1
 Petition: ['GET / HTTP/1.1']
 By User-Agent:  curl/7.66.0
 *
+Detected: Blocked IP
+IP: 127.0.0.1
+Petition: ['GET / HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+*

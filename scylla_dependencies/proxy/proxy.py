@@ -2,6 +2,7 @@
 
 import socket
 import threading
+
 from scylla_dependencies.WAF.analizer.analizer import Analizer  # firewall class
 from scylla_dependencies.WAF.parser.parsepetition import *
 
@@ -23,7 +24,8 @@ class Proxy:
     def receive_send_data(self, sock2, client, con_data):
 
         received = client.recv(1024)  # data from client (browser)
-        if any(self.parser.parse_get(received)) or any(self.parser.parse_post(received)) or self.parser.get_method(received) not in ["GET","POST"]:  # if parameters in get or post
+        if any(self.parser.parse_get(received)) or any(self.parser.parse_post(received)) or self.parser.get_method(
+                received) not in ["GET", "POST"]:  # if parameters in get or post
             sock2.send(self.analizer.scylla(received, self.CLIENT2SERVER, con_data))  # analyse and send
             out = sock2.recv(self.maxlength)  # received from server
 
@@ -33,11 +35,12 @@ class Proxy:
         else:  # if not parameters, does not analyse
             if self.analizer.blockIP(received, con_data[0]):
                 sock2.send(bytes(
-                "GET / HTTP/1.1\r\nHost: 127.0.0.1:4440\r\nUser-Agent: curl/7.64.0\r\nAccept: */*\r\n\r\n",
-                encoding='utf8'))
+                    "GET / HTTP/1.1\r\nHost: 127.0.0.1:4440\r\nUser-Agent: curl/7.64.0\r\nAccept: */*\r\n\r\n",
+                    encoding='utf8'))
             else:
                 sock2.send(received)  # send to server
-
+            self.analizer.savepetition("scylla_dependencies/WAF/log/good.log",
+                                       self.parser.get_method(received))  # log good petitions  for graphics
             out = sock2.recv(self.maxlength)  # received from server
             client.send(out)  # send to client ( browser )
             client.close()
@@ -50,7 +53,8 @@ class Proxy:
         sock.listen(1)
 
         print('[*] Listening on {0} {1}'.format(self.local_addr, self.lport))  # proxy listener, up to 10 clients
-        print("Client () -> Proxy ({}:{}) -> Server ({}:{})".format(self.local_addr,self.lport, self.remote_addr, self.rport))
+        print("Client () -> Proxy ({}:{}) -> Server ({}:{})".format(self.local_addr, self.lport, self.remote_addr,
+                                                                    self.rport))
 
         while True:
             try:

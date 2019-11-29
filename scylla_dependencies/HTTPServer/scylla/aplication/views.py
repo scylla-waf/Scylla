@@ -11,7 +11,27 @@ from .models import Request
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        return render(request, "index.html")
+        Request.objects.all().delete()
+        manf = open("scylla_dependencies/WAF/log/petition.log")
+        objetos = []
+        for f in manf:
+            if f.rstrip('\n')=="*":
+                if "GET" in " ".join(objetos[2].split(":")[1:])[2:]:
+                    petition = Request(ip=objetos[1].split(" ")[1], petition=" ".join(objetos[2].split(":")[1:])[3:-2],detection=objetos[3].split(":")[1])
+                else:
+                     petition = Request(ip=objetos[1].split(" ")[1], petition=" ".join(objetos[2].split(":")[1:]),detection=objetos[3].split(":")[1])
+                petition.save()
+                objetos = []
+            else:
+                objetos.append(f.rstrip('\n'))
+        
+        petitions = Request.objects.all()
+        bad_petitions = Request.objects.all().count()
+        context = {
+            "petitions": petitions,
+            "bad_petitions": bad_petitions,
+        }
+        return render(request, "index.html", context)
     return redirect('/')
 
 def register(request):
@@ -65,9 +85,12 @@ def requests(request):
             objetos = []
         else:
             objetos.append(f.rstrip('\n'))
-
+    
+    petitions = Request.objects.all()
+    bad_petitions = Request.objects.all().count()
     context = {
-        "objetos": objetos, 
+        "petitions": petitions,
+        "bad_petitions": bad_petitions,
     }
     return render(request, "requests.html", context)
 

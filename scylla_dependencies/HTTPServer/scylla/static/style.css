@@ -1,6 +1,6 @@
 /* General */
 body{
-    background: #686894;
+    background: #1d1e23;
     color: white;
     margin: 0;
 }
@@ -28,31 +28,44 @@ a{
 /* Index */
 .container2{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 0.5% 2%;
+    font-size: 14px;
 }
 nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: gray;
-    padding: 0 2%;
-}
-nav ul{
-    padding: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-ul a li{
-    display: inline;
-}
-ul a{
-    margin-top: 1%;
-    margin-left: 3%;
+    background: #47494f;
+    padding: 1% 2%;
+    color: #187dcb;
 }
 nav a{
     text-decoration: none;
+    color: #187dcb;
+}
+nav .left{
+    display: flex;
+    align-items: center;
+}
+nav .left span{
+    margin-top: 0.5%;
+    margin-left: 2%;
+}
+.petitions{
+    width: 100%;
+    display: flex;;
+    flex-wrap: nowrap;
+}
+.petitions span:nth-child(1){
+    width: 10%;
+}
+.petitions span:nth-child(2){
+    width: 55%;
+}
+.petitions span:nth-child(3){
+    width: 35%; 
 }
 .cerrar_sesion{
     list-style: none;
