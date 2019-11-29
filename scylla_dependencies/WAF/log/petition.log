@@ -148,3 +148,78 @@ IP: 127.0.0.1
 Petition: ['GET /?id=UNION HTTP/1.1']
 By User-Agent:  curl/7.65.3
 
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=1z HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=1z HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=1z HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=1z HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=1z HTTP/1.1']
+By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=1z HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: lol method used 
+IP: 127.0.0.1
+Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+*
+Detected: lol method used 
+IP: 127.0.0.1
+Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+*
+Detected: lol method used 
+IP: 127.0.0.1
+Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+*
+Detected: lol method used 
+IP: 127.0.0.1
+Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+*
+Detected: sdg method used 
+IP: 127.0.0.1
+Petition: b'sdg / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+*
+Detected: Blocked IP
+IP: 127.0.0.1
+Petition: b'sdg / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+*
+Detected: sdg method used 
+IP: 127.0.0.1
+Petition: b'sdg / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
+By User-Agent:  curl/7.66.0
+*
+Detected: Blocked IP
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=3 HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Blocked IP
+IP: 127.0.0.1
+Petition: ['GET / HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*

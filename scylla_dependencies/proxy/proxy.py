@@ -21,6 +21,7 @@ class Proxy:
         self.parser = Parsepetition()  # class used to parse petitions
 
     def receive_send_data(self, sock2, client, con_data):
+
         received = client.recv(1024)  # data from client (browser)
         if any(self.parser.parse_get(received)) or any(self.parser.parse_post(received)) or self.parser.get_method(received) not in ["GET","POST"]:  # if parameters in get or post
             sock2.send(self.analizer.scylla(received, self.CLIENT2SERVER, con_data))  # analyse and send
@@ -30,7 +31,13 @@ class Proxy:
             client.close()
 
         else:  # if not parameters, does not analyse
-            sock2.send(received)  # send to server
+            if self.analizer.blockIP(received, con_data[0]):
+                sock2.send(bytes(
+                "GET / HTTP/1.1\r\nHost: 127.0.0.1:4440\r\nUser-Agent: curl/7.64.0\r\nAccept: */*\r\n\r\n",
+                encoding='utf8'))
+            else:
+                sock2.send(received)  # send to server
+
             out = sock2.recv(self.maxlength)  # received from server
             client.send(out)  # send to client ( browser )
             client.close()

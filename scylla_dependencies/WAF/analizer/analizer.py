@@ -77,20 +77,15 @@ class Analizer:
         return False
 
     def blockIP(self, petition, ip):
-        with open("scylla/waf/ip.list") as fp:
-            line = fp.readline()
-            cnt = 1
-            while line:
 
-                if ip is line.strip():
-                    print("Es la ip")
+        with open("scylla_dependencies/WAF/ip.list") as fp:
+            ips = fp.readlines()
+            for ip_list in ips:
+                if ip_list == ip:
                     self.log_attack(petition, "Blocked IP", ip)
                     return True
-
-                line = fp.readline()
-            cnt += 1
-            print(line)
             return False
+
 
 
     def verb_analysis(self, petition, ip):  # petition is raw
@@ -104,9 +99,7 @@ class Analizer:
 
     def request_analysis(self, data, ip):  # start request analysis
         if not self.learn:
-
             if "GET" in self.parser.get_method(data):  # if GET
-
                 get_data = data.decode("utf-8").split("\r\n")[:1]  # url decode
                 get_data = ''.join(get_data)
                 get_data = get_data.split("GET ")[1]
@@ -117,11 +110,13 @@ class Analizer:
                # if self.AI(self.parser.parse_get(data)): return True
                 if self.variable_type(data,self.parser.parse_get(data),ip): return True
                 if self.simple_analysis(data, self.parser.parse_get(data),ip): return True
+
             else:
                # if self.AI(self.parser.parse_post(data)): return True
                 if self.variable_type(data, self.parser.parse_post(data),ip): return True
                 if self.simple_analysis(data, self.parser.parse_post(data), ip): return True
                 if self.verb_analysis(data, ip): return True  # if used a blocked verb...
+
         else:
             pass # analiza IA
 
@@ -129,8 +124,10 @@ class Analizer:
         pass
 
     def scylla(self, received, conn_type, con_data):  # main def of firewall
+
         blocked = self.config.getconfig("scylla_dependencies/WAF/waf.conf")["replace"].split(
             ":")  # get chars to block
+
         for i in blocked:
             received.replace(bytes(i, encoding="utf-8"), b" ")  # remove bad chars
 
