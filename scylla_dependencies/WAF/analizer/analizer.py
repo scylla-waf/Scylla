@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import string
-from scylla import Config
-from scylla_dependencies.WAF.parser.parsepetition import *  # parse GET, POST, get type of request...
 from urllib.parse import unquote
+
+from scylla import Config
 from scylla_dependencies.WAF.intelligence.intelligence import *
 from scylla_dependencies.WAF.learn.trainAI import *
+from scylla_dependencies.WAF.parser.parsepetition import *  # parse GET, POST, get type of request...
+
 
 class Analizer:
 
@@ -27,7 +28,7 @@ class Analizer:
                 else:
                     return False
 
-    def variable_type(self, petition, dict,ip):
+    def variable_type(self, petition, dict, ip):
         variable1 = self.config.getconfig("config/variables.conf")  # ex. {"id": "numeric', "lol":"string"}
 
         numeric = variable1["numeric"]  # get numeric
@@ -48,7 +49,6 @@ class Analizer:
                         self.log_attack(petition, "Used bad type in " + key, ip)
                         return True  # blocked
                 return False
-
 
     def log_attack(self, petition, attack, ip):
         if "GET" in self.parser.get_method(petition):
@@ -94,7 +94,6 @@ class Analizer:
                     return True
             return False
 
-
     def verb_analysis(self, petition, ip):  # petition is raw
         allowed = self.config.getconfig("scylla_dependencies/WAF/waf.conf")["allowed_verbs"].split(
             ",")  # get allowed methods
@@ -113,19 +112,20 @@ class Analizer:
                 get_data = ''.join(get_data)
                 get_data = get_data.split(" ", 1)[0]  # returns url
 
-                data = data.replace(bytes(get_data, encoding="utf-8"), bytes(unquote(get_data), encoding="utf-8"))  # URL decode
-               # if self.AI(self.parser.parse_get(data)): return True
-                if self.variable_type(data,self.parser.parse_get(data),ip): return True
-                if self.simple_analysis(data, self.parser.parse_get(data),ip): return True
+                data = data.replace(bytes(get_data, encoding="utf-8"),
+                                    bytes(unquote(get_data), encoding="utf-8"))  # URL decode
+                # if self.AI(self.parser.parse_get(data)): return True
+                if self.variable_type(data, self.parser.parse_get(data), ip): return True
+                if self.simple_analysis(data, self.parser.parse_get(data), ip): return True
 
             else:
-               # if self.AI(self.parser.parse_post(data)): return True
-                if self.variable_type(data, self.parser.parse_post(data),ip): return True
+                # if self.AI(self.parser.parse_post(data)): return True
+                if self.variable_type(data, self.parser.parse_post(data), ip): return True
                 if self.simple_analysis(data, self.parser.parse_post(data), ip): return True
                 if self.verb_analysis(data, ip): return True  # if used a blocked verb...
 
         else:
-            pass # analiza IA
+            pass  # analiza IA
 
     def response_analysis(self):  # main def to start response analysis
         pass
@@ -134,6 +134,28 @@ class Analizer:
         with open(file, "a+") as f:
             f.writelines("," + method)
 
+    def blockByLen(self, petition, variables_dict, ip):
+        with open("scylla_dependencies/WAF/log/len_block.log", "r") as f:
+            length_dict = f.readlines()
+            length_dict = ''.join(length_dict)
+            length_dict = eval(length_dict)
+        for variable in variables_dict:
+            if not variable in length_dict:
+                length_dict[variable] = len(variables_dict[variable])  # if variable is new add it to file
+            else:
+                if len(variables_dict[variable]) * 0.25 >= length_dict[
+                    variable]:  # if variable is 175 % bigger of average
+                    attack = str(variables_dict[variable]) + " is too big, average: " + str(
+                        length_dict[variable]) + " petition: " + str(variables_dict[variable])
+                    self.log_attack(petition, attack, ip)
+                    return True
+                else:
+                    new_len = (len(variables_dict[variable]) + length_dict[variable]) / 2
+                    new_len = int(new_len)
+                    length_dict[variable] = new_len
+        with open("scylla_dependencies/WAF/log/len_block.log", "w+") as f:
+            f.writelines(length_dict)
+        return False
 
     def scylla(self, received, conn_type, con_data):  # main def of firewall
 
@@ -149,7 +171,8 @@ class Analizer:
                 self.savepetition("scylla_dependencies/WAF/log/good.log", self.parser.get_method(received))
                 return received
             else:
-                return bytes("GET / HTTP/1.1\r\nHost: 127.0.0.1:4440\r\nUser-Agent: curl/7.64.0\r\nAccept: */*\r\n\r\n",encoding='utf8')  # if True ( blocked ) return /
+                return bytes("GET / HTTP/1.1\r\nHost: 127.0.0.1:4440\r\nUser-Agent: curl/7.64.0\r\nAccept: */*\r\n\r\n",
+                             encoding='utf8')  # if True ( blocked ) return /
 
         else:  # analyze response
             return received  # response analysis
