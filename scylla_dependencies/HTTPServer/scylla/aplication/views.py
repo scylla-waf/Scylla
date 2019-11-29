@@ -26,7 +26,7 @@ def index(request):
                 objetos = []
             else:
                 objetos.append(f.rstrip('\n'))
-        
+
         petitions = Request.objects.all()
         page = request.GET.get('page')
         paginator = Paginator(petitions, 10)
@@ -34,11 +34,12 @@ def index(request):
         bad_petitions = Request.objects.all().count()
         manf = open("scylla_dependencies/WAF/log/good.log")
         manf = manf.read().split(",")
-        good_petitions = len(manf)
+        good_petitions = len(manf)-1
         get_petitions = manf.count("GET")
         post_petitions = manf.count("POST")
         put_petitions = manf.count("PUT")
-        other_petitions = good_petitions - (get_petitions + post_petitions + put_petitions)
+        other_petitions = good_petitions+1 - (get_petitions + post_petitions + put_petitions)
+
         context = {
             "petitions": petitions,
             "bad_petitions": bad_petitions,
@@ -53,17 +54,17 @@ def index(request):
 
 def config(request):
     manf = open("config/scylla.conf")
-    for linea in manf:
-        if linea.split(" ")[0] == "proxyhost":
-            proxyhost = linea.split(" ")[2]
-        elif linea.split(" ")[0] == "proxyport":
-            proxyport = linea.split(" ")[2]
-        elif linea.split(" ")[0] == "server_addr":
-            server_addr = linea.split(" ")[2]
-        elif linea.split(" ")[0] == "server_port":
-            server_port = linea.split(" ")[2]
-        elif linea.split(" ")[0] == "HTTPport":
-            djangoport = linea.split(" ")[2]
+    for line in manf:
+        if line.split(" ")[0] == "proxyhost":
+            proxyhost = line.split(" ")[2]
+        elif line.split(" ")[0] == "proxyport":
+            proxyport = line.split(" ")[2]
+        elif line.split(" ")[0] == "server_addr":
+            server_addr = line.split(" ")[2]
+        elif line.split(" ")[0] == "server_port":
+            server_port = line.split(" ")[2]
+        elif line.split(" ")[0] == "HTTPport":
+            djangoport = line.split(" ")[2]
     formscylla = ScyllaForm(request.POST or None, initial={'proxyhost': proxyhost, 'proxyport': proxyport, 'server_addr': server_addr, 'server_port': server_port, 'djangoport': djangoport})
     if formscylla.is_valid():
         manf = open("config/scylla.conf", "w")
@@ -71,6 +72,14 @@ def config(request):
         manf.writelines(seq)
         manf.close()
     
+    manf = open("config/variables.conf")
+    for line in manf:
+        if line.split("=")[0] == "string":
+            string = line.split("=")[1]
+        elif line.split("=")[0] == "numeric":
+            numeric = line.split("=")[1]
+        elif line.split("=")[0] == "strange":
+            strange = line.split("=")[1]
 
     context = {
         "formscylla": formscylla,

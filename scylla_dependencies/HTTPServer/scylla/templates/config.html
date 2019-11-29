@@ -5,7 +5,7 @@
     <form action="" method="POST">
         {% csrf_token %}
         {{ formscylla.as_p }}
-        <input type="submit" value="Change Config" onclick="javascript:alert('Changes has been made');">
+        <input type="submit" value="Change Config" onclick="javascript:alert('Changes has been made.\nReset scylla for see the changes');">
     </form>
 </div>
 {% endblock %}

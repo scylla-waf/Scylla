@@ -138,7 +138,8 @@ class Analizer:
 
     def savepetition(self, file, method):
         with open(file, "a+") as f:
-            f.writelines("," + method)
+            f.writelines(method)
+            f.writelines(",")
 
     def blockByLen(self, petition, variables_dict, ip):
         with open("scylla_dependencies/WAF/log/len_block.log", "r") as f:
