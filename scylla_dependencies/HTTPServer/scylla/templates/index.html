@@ -12,7 +12,7 @@
       ['Good Petitions', {{good_petitions}}],
     ]);
 
-    var options = {backgroundColor: 'transparent','title':'All Petitions',pieHole: 0.4,colors: ['#d786c9', '#6743b1'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' }  };
+    var options = {backgroundColor: 'transparent','title':'All Petitions',pieHole: 0.4,colors: ['#9e3735', '#55c083'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' },sliceVisibilityThreshold:0};
 
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
     chart.draw(data, options);
@@ -30,7 +30,7 @@
       ['Other Petitions', {{other_petitions}}],
     ]);
 
-    var options = {backgroundColor: 'transparent','title':'Petition Types',pieHole: 0.4,colors: ['#55c083', '#9e3735','#d786c9', '#6743b1'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' },sliceVisibilityThreshold:0};
+    var options = {backgroundColor: 'transparent','title':'Petition Types',pieHole: 0.4,colors: ['#d786c9', '#6743b1','#55c083', '#9e3735'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' },sliceVisibilityThreshold:0};
 
     var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
     chart.draw(data, options);
@@ -39,18 +39,34 @@
 <div class="container2">
     <div class="left_side">
         <h2>Bad Petitions</h2>
-        <div class="petitions">
-            <span>Host</span>
-            <span>Petition</span>
-            <span>User Agent</span>
+        <div class="all_petitions">
+          <div class="petitions">
+              <span>Host</span>
+              <span>Petition</span>
+              <span>User Agent</span>
+          </div>
+              {% for petition in petitions %}
+                <div class="petitions">
+                    <span>{{petition.ip}}</span>
+                    <span>{{petition.petition}}</span>
+                    <span>{{petition.detection}}</span>
+                </div>
+              {% endfor %}
         </div>
-            {% for petition in petitions %}
-              <div class="petitions">
-                  <span>{{petition.ip}}</span>
-                  <span>{{petition.petition}}</span>
-                  <span>{{petition.detection}}</span>
-              </div>
-            {% endfor %}
+
+        <div class="pagination">
+            {% if petitions.has_previous %}
+            <a href="?page={{ petitions.previous_page_number }}">Anterior</a>
+            {% endif %}
+            
+            <span>{{ petitions.number }}</span>
+            <span">de</span>
+            <span>{{ petitions.paginator.num_pages }}</span>
+            
+            {% if petitions.has_next %}
+            <a href="?page={{ petitions.next_page_number }}">Siguiente</a>
+            {% endif %}
+        </div> 
     </div>
 
     <div class="right_side">

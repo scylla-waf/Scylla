@@ -7,6 +7,8 @@ from .forms import UserCreateForm, ScyllaForm
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from .models import Request
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 def index(request):
@@ -26,6 +28,9 @@ def index(request):
                 objetos.append(f.rstrip('\n'))
         
         petitions = Request.objects.all()
+        page = request.GET.get('page')
+        paginator = Paginator(petitions, 10)
+        petitions = paginator.get_page(page)
         bad_petitions = Request.objects.all().count()
         manf = open("scylla_dependencies/WAF/log/good.log")
         manf = manf.read().split(",")
@@ -59,15 +64,16 @@ def config(request):
             server_port = linea.split(" ")[2]
         elif linea.split(" ")[0] == "HTTPport":
             djangoport = linea.split(" ")[2]
-    form = ScyllaForm(request.POST or None, initial={'proxyhost': proxyhost, 'proxyport': proxyport, 'server_addr': server_addr, 'server_port': server_port, 'djangoport': djangoport})
-    if form.is_valid():
+    formscylla = ScyllaForm(request.POST or None, initial={'proxyhost': proxyhost, 'proxyport': proxyport, 'server_addr': server_addr, 'server_port': server_port, 'djangoport': djangoport})
+    if formscylla.is_valid():
         manf = open("config/scylla.conf", "w")
-        seq = ["# proxy info ( default in localhost:4440 )\n\n" , "proxyhost = " + form.cleaned_data['proxyhost'], "\nproxyport = " + form.cleaned_data['proxyport'], "\n\n# server info (default)\nserver_addr = " + form.cleaned_data['server_addr'], "\nserver_port = " + form.cleaned_data['server_port'], "\n\n# djando info\nHTTPport = " + form.cleaned_data['djangoport'], "\n\n# max bytes received from server\nmaxlength = 10000",]
+        seq = ["# proxy info ( default in localhost:4440 )\n\n" , "proxyhost = " + formscylla.cleaned_data['proxyhost'], "\nproxyport = " + formscylla.cleaned_data['proxyport'], "\n\n# server info (default)\nserver_addr = " + formscylla.cleaned_data['server_addr'], "\nserver_port = " + formscylla.cleaned_data['server_port'], "\n\n# djando info\nHTTPport = " + formscylla.cleaned_data['djangoport'], "\n\n# max bytes received from server\nmaxlength = 10000",]
         manf.writelines(seq)
         manf.close()
+    
 
     context = {
-        "form": form,
+        "formscylla": formscylla,
     }
     return render(request, "config.html", context)
 

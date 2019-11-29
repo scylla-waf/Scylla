@@ -53,15 +53,30 @@ nav .left span{
     margin-top: 0.5%;
     margin-left: 2%;
 }
+.left_side{
+    width: 100%;
+}
+.all_petitions{
+    border-left: 1px solid rgb(163,163,163, 0.5);
+    border-right: 1px solid rgb(163,163,163, 0.5);
+}
+.left_side h2{
+    text-align: center;
+    border-bottom: 1px solid rgb(163,163,163, 0.5);
+    padding-bottom: 1%;
+    margin-bottom: 0;
+}
 .petitions{
     width: 100%;
     display: flex;;
     flex-wrap: nowrap;
     border-bottom: 1px solid rgb(163,163,163, 0.5);
     padding: 1% 0;
+    margin: 0;
 }
 .petitions span:nth-child(1){
     width: 10%;
+    margin-left: 2%;
 }
 .petitions span:nth-child(2){
     width: 55%;
@@ -71,6 +86,10 @@ nav .left span{
 }
 .logout{
     list-style: none;
+}
+.pagination{
+    text-align: center;
+    margin-top: 5%;
 }
 /* Forms */
 .forms{
