@@ -134,6 +134,7 @@ class Analizer:
         with open(file, "a+") as f:
             f.writelines("," + method)
 
+
     def scylla(self, received, conn_type, con_data):  # main def of firewall
 
         blocked = self.config.getconfig("scylla_dependencies/WAF/waf.conf")["replace"].split(
