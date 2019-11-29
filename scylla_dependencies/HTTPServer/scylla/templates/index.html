@@ -23,14 +23,14 @@
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ['Petitions', 'Petitions Types'],
+      ['Petitions', 'Good Petitions Types Methods'],
       ['GET Petitions', {{get_petitions}}],
       ['POST Petitions', {{post_petitions}}],
       ['PUT Petitions', {{put_petitions}}],
       ['Other Petitions', {{other_petitions}}],
     ]);
 
-    var options = {backgroundColor: 'transparent','title':'Petition Types',pieHole: 0.4,colors: ['#d786c9', '#6743b1','#55c083', '#9e3735'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' },sliceVisibilityThreshold:0};
+    var options = {backgroundColor: 'transparent','title':'Good Petitions Types Methods',pieHole: 0.4,colors: ['#d786c9', '#6743b1','#55c083', '#9e3735'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' },sliceVisibilityThreshold:0};
 
     var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
     chart.draw(data, options);

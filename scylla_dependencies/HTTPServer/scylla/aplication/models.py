@@ -10,3 +10,8 @@ class Request(models.Model):
     def __str__(self):
         return self.ip
 
+class Variables(models.Model):
+    nombre = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.nombre

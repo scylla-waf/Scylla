@@ -38,7 +38,10 @@ def index(request):
         get_petitions = manf.count("GET")
         post_petitions = manf.count("POST")
         put_petitions = manf.count("PUT")
-        other_petitions = good_petitions+1 - (get_petitions + post_petitions + put_petitions)
+        if good_petitions == 0:
+            other_petitions = 0
+        else:
+            other_petitions = good_petitions+1 - (get_petitions + post_petitions + put_petitions)
 
         context = {
             "petitions": petitions,
@@ -80,6 +83,8 @@ def config(request):
             numeric = line.split("=")[1]
         elif line.split("=")[0] == "strange":
             strange = line.split("=")[1]
+
+    # Miramos los objetos variables para ver los tipos de variable que tiene y conseguimos
 
     context = {
         "formscylla": formscylla,
