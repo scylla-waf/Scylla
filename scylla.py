@@ -43,7 +43,7 @@ def init():  # start main
         lines = []
         with open('config/scylla.conf') as infile:
             for line in infile:
-                line = line.replace("SECRET_KEY", "'" + get_random_secret_key() + "'")
+                line = line.replace("SECRET_KEY", "'" + get_random_secret_key().replace("#","") + "'")
                 lines.append(line)
         with open('config/scylla.conf', 'w') as outfile:
             for line in lines:
