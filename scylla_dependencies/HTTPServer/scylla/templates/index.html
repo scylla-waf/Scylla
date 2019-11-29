@@ -9,12 +9,30 @@
     var data = google.visualization.arrayToDataTable([
       ['Petitions', 'All Petitions'],
       ['Bad Petitions', {{bad_petitions}}],
-      ['Good Petitions', 10],
+      ['Good Petitions', {{good_petitions}}],
     ]);
 
-    var options = {backgroundColor: 'transparent','title':'All Petitions',pieHole: 0.4,colors: ['#2a898e', '#392a8e'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' }  };
+    var options = {backgroundColor: 'transparent','title':'All Petitions',pieHole: 0.4,colors: ['#d786c9', '#6743b1'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' }  };
 
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+    chart.draw(data, options);
+  }
+</script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Petitions', 'Petitions Types'],
+      ['GET Petitions', {{get_petitions}}],
+      ['POST Petitions', {{post_petitions}}],
+      ['PUT Petitions', {{put_petitions}}],
+      ['Other Petitions', {{other_petitions}}],
+    ]);
+
+    var options = {backgroundColor: 'transparent','title':'Petition Types',pieHole: 0.4,colors: ['#55c083', '#9e3735','#d786c9', '#6743b1'],titleTextStyle: {color: '#fff'},'legendTextStyle': { 'color': '#fff' },sliceVisibilityThreshold:0};
+
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
     chart.draw(data, options);
   }
 </script>
@@ -27,17 +45,17 @@
             <span>User Agent</span>
         </div>
             {% for petition in petitions %}
-            <div class="petitions">
-                <span>{{petition.ip}}</span>
-                <span>{{petition.petition}}</span>
-                <span>{{petition.detection}}</span>
-            </div>
+              <div class="petitions">
+                  <span>{{petition.ip}}</span>
+                  <span>{{petition.petition}}</span>
+                  <span>{{petition.detection}}</span>
+              </div>
             {% endfor %}
-        </table>
     </div>
 
     <div class="right_side">
         <div id="donutchart" style="width: 500px; height: 300px;"></div>
+        <div id="donutchart2" style="width: 500px; height: 300px;"></div>
     </div>
 
 </div>

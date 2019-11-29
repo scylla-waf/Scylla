@@ -57,6 +57,8 @@ nav .left span{
     width: 100%;
     display: flex;;
     flex-wrap: nowrap;
+    border-bottom: 1px solid rgb(163,163,163, 0.5);
+    padding: 1% 0;
 }
 .petitions span:nth-child(1){
     width: 10%;
@@ -67,6 +69,31 @@ nav .left span{
 .petitions span:nth-child(3){
     width: 35%; 
 }
-.cerrar_sesion{
+.logout{
     list-style: none;
+}
+/* Forms */
+.forms{
+    display: flex;
+    justify-content: center;
+}
+form{
+    width: 20%;
+    margin-top: 5%;
+}
+form p{
+    display: flex;
+    justify-content: space-around;
+}
+form input[type=submit]{
+    display: flex;
+    margin: 10% auto;
+    padding: 2%;
+    background: #47494f;
+    color: white;
+    border-color: #47494f;
+}
+.forms input{
+    border-radius: 5%;
+
 }

@@ -11,9 +11,10 @@
         <nav>
             <div class="left">
                 <img src="{% static 'logo.png' %}" alt="" width="5%"> 
-                <span>Welcome {{request.user.username}}</span>
+                <span><a href="/index.html">Requests</a></span>
+                <span><a href="config">Config</a></span>
             </div>
-            <a href="/logout" class="cerrar_sesion"><li>Log out</li></a>
+            <a href="/logout" class="logout"><li>Log out</li></a>
         </nav>
     {% endif %}
     {% block container %} {% endblock %}

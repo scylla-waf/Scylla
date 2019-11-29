@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from urllib.parse import unquote
+import ast  # for eval() dict
 
 from scylla import Config
 from scylla_dependencies.WAF.intelligence.intelligence import *
@@ -117,12 +118,13 @@ class Analizer:
                 # if self.AI(self.parser.parse_get(data)): return True
                 if self.variable_type(data, self.parser.parse_get(data), ip): return True
                 if self.simple_analysis(data, self.parser.parse_get(data), ip): return True
-
+                if self.blockByLen(data, self.parser.parse_get(data),ip): return True
             else:
                 # if self.AI(self.parser.parse_post(data)): return True
                 if self.variable_type(data, self.parser.parse_post(data), ip): return True
                 if self.simple_analysis(data, self.parser.parse_post(data), ip): return True
                 if self.verb_analysis(data, ip): return True  # if used a blocked verb...
+                if self.blockByLen(data, self.parser.parse_post(data), ip): return True
 
         else:
             pass  # analiza IA
@@ -138,23 +140,31 @@ class Analizer:
         with open("scylla_dependencies/WAF/log/len_block.log", "r") as f:
             length_dict = f.readlines()
             length_dict = ''.join(length_dict)
-            length_dict = eval(length_dict)
+            try:
+                length_dict = ast.literal_eval(length_dict)
+            except Exception:
+                print("Bad len_block.log")
+                exit()
+
         for variable in variables_dict:
-            if not variable in length_dict:
-                length_dict[variable] = len(variables_dict[variable])  # if variable is new add it to file
-            else:
+            if variable in length_dict:
                 if len(variables_dict[variable]) * 0.25 >= length_dict[
                     variable]:  # if variable is 175 % bigger of average
-                    attack = str(variables_dict[variable]) + " is too big, average: " + str(
-                        length_dict[variable]) + " petition: " + str(variables_dict[variable])
+                    attack = "'" + str(variables_dict[variable]) + "' is too big, average: " + str(
+                        length_dict[variable]) + " digits"
                     self.log_attack(petition, attack, ip)
                     return True
                 else:
                     new_len = (len(variables_dict[variable]) + length_dict[variable]) / 2
                     new_len = int(new_len)
                     length_dict[variable] = new_len
+
+            else:
+                new_len = int(len(variables_dict[variable]))
+                length_dict[variable] = new_len  # if variable is new add it to file
+        print("[DEBUG] Saving : " + str(length_dict))
         with open("scylla_dependencies/WAF/log/len_block.log", "w+") as f:
-            f.writelines(length_dict)
+            f.writelines(str(length_dict))
         return False
 
     def scylla(self, received, conn_type, con_data):  # main def of firewall

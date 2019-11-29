@@ -38,12 +38,12 @@ IP: 127.0.0.1
 Petition: lol='
 By User-Agent:  curl/7.66.0
 
-Detected: LOL method used 
+Detected: LOL method used
 IP: 127.0.0.1
 Petition: b'LOL / HTTP/1.1\r\nHost: 127.0.0.1:4441\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
 
-Detected: LOL method used 
+Detected: LOL method used
 IP: 127.0.0.1
 Petition: b'LOL / HTTP/1.1\r\nHost: 127.0.0.1:4441\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
@@ -63,7 +63,7 @@ IP: 127.0.0.1
 Petition: ['GET /index.php?id=union HTTP/1.1']
 By User-Agent:  curl/7.66.0
 
-Detected: lol method used 
+Detected: lol method used
 IP: 127.0.0.1
 Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4441\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
@@ -133,12 +133,12 @@ IP: 127.0.0.1
 Petition: id=lol
 By User-Agent:  curl/7.65.3
 
-Detected: aa method used 
+Detected: aa method used
 IP: 127.0.0.1
 Petition: b'aa / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.65.3\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.65.3
 
-Detected: aa method used 
+Detected: aa method used
 IP: 127.0.0.1
 Petition: b'aa /?id=UNION HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.65.3\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.65.3
@@ -178,27 +178,27 @@ IP: 127.0.0.1
 Petition: ['GET /index.php?id=1z HTTP/1.1']
 By User-Agent:  curl/7.66.0
 *
-Detected: lol method used 
+Detected: lol method used
 IP: 127.0.0.1
 Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
 *
-Detected: lol method used 
+Detected: lol method used
 IP: 127.0.0.1
 Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
 *
-Detected: lol method used 
+Detected: lol method used
 IP: 127.0.0.1
 Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
 *
-Detected: lol method used 
+Detected: lol method used
 IP: 127.0.0.1
 Petition: b'lol / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
 *
-Detected: sdg method used 
+Detected: sdg method used
 IP: 127.0.0.1
 Petition: b'sdg / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
@@ -208,7 +208,7 @@ IP: 127.0.0.1
 Petition: b'sdg / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
 *
-Detected: sdg method used 
+Detected: sdg method used
 IP: 127.0.0.1
 Petition: b'sdg / HTTP/1.1\r\nHost: 127.0.0.1:4443\r\nUser-Agent: curl/7.66.0\r\nAccept: */*\r\n\r\n'
 By User-Agent:  curl/7.66.0
@@ -343,7 +343,7 @@ IP: 127.0.0.1
 Petition: ["GET /index.php?id=1' HTTP/1.1"]
 By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
 *
-Detected:  method used 
+Detected:  method used
 IP: 127.0.0.1
 Petition: b''
 By User-Agent: Cant Detect UA
@@ -353,31 +353,66 @@ IP: 127.0.0.1
 Petition: ["GET /index.php?id=1' HTTP/1.1"]
 By User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
 *
-Detected:  method used 
+Detected:  method used
 IP: 127.0.0.1
 Petition: b''
 By User-Agent: Cant Detect UA
 *
-Detected: 
- method used 
+Detected:
+ method used
 IP: 127.0.0.1
 Petition: b'\n'
 By User-Agent: Cant Detect UA
 *
 Detected: a
- method used 
+ method used
 IP: 127.0.0.1
 Petition: b'a\n'
 By User-Agent: Cant Detect UA
 *
 Detected: s
- method used 
+ method used
 IP: 127.0.0.1
 Petition: b's\n'
 By User-Agent: Cant Detect UA
 *
-Detected: sai method used 
+Detected: sai method used
 IP: 127.0.0.1
 Petition: b'sai gkisahbg kasbgf ljasg ljasbfgasd g\n'
 By User-Agent: Cant Detect UA
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ["GET /index.php?id=1' HTTP/1.1"]
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=199826348 HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: Used bad type in id
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=199826 HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: 19982634997444444444429384765928374659823765982375982735982375987264358972643589762345897623458762394867435 is too big, average: 17 petition: 19982634997444444444429384765928374659823765982375982735982375987264358972643589762345897623458762394867435
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=19982634997444444444429384765928374659823765982375982735982375987264358972643589762345897623458762394867435 HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: joseasdsd872349862458364258972364589764235897623498576238946598237465982345 is too big, average: 6 petition: joseasdsd872349862458364258972364589764235897623498576238946598237465982345
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=199826349974444444444&pepe=joseasdsd872349862458364258972364589764235897623498576238946598237465982345 HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: 'joseasdsd872349862458364258972364589764235897623498576238946598237465982345' is too big, average: 6
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=199826349974444444444&pepe=joseasdsd872349862458364258972364589764235897623498576238946598237465982345 HTTP/1.1']
+By User-Agent:  curl/7.66.0
+*
+Detected: 'joseasdsd872349862458364258972364589764235897623498576238946598237465982345' is too big, average: 6 digits
+IP: 127.0.0.1
+Petition: ['GET /index.php?id=199826349974444444444&pepe=joseasdsd872349862458364258972364589764235897623498576238946598237465982345 HTTP/1.1']
+By User-Agent:  curl/7.66.0
 *
