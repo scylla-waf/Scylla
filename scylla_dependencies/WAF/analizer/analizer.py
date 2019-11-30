@@ -19,7 +19,8 @@ class Analizer:
         self.learn = learn  # should AI learn or detect ?
         self.deffendbyAI = IntelligentDetect()
         self.train = trainAI()
-        colourful = colours()
+        options = self.config.getconfig("config/scylla.conf")
+        self.mode = options["mode"]
 
     def AI(self, dict):
         for i in dict:
@@ -27,7 +28,11 @@ class Analizer:
                 self.train.learn_from_petitions(dict[i])
             else:
                 if self.deffendbyAI.identify(dict[i]):
-                    return True
+                    if self.mode == "analysis":
+                        print("[analysis] attack detected, but no blocking")
+                        return False
+                    else:
+                        return True
                 else:
                     return False
 
@@ -49,11 +54,15 @@ class Analizer:
                     else:
                         testin = strange
                     if not str(i) in testin:
-                        self.log_attack(petition, "Used bad type in " + key, ip)
-                        return True  # blocked
+                        self.log_attack(petition, "Used bad type in " + key, 1, ip)
+                        if self.mode == "analysis":
+                            print("[analysis] attack detected, but no blocking")
+                            return False
+                        else:
+                            return True
                 return False
 
-    def log_attack(self, petition, attack, ip):
+    def log_attack(self, petition, attack, id,ip):
         if "GET" in self.parser.get_method(petition):
             parameters = petition.decode("utf-8").split("\r\n")[:1]
         elif "POST" in self.parser.get_method(petition):
@@ -66,28 +75,35 @@ class Analizer:
             pass
         print("\nBlocked: " + colourful.red + str(attack) + colourful.end)
         print("IP: " + str(ip))
+
         try:
             print("User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
         except:
             pass
         print("Petition: " + str(parameters))
+        print("ID: " + str(id))
 
         with open("scylla_dependencies/WAF/log/petition.log", "a") as f:
             f.writelines("Detected: " + str(attack) + "\n")
             f.writelines("IP: " + str(ip) + "\n")
             f.writelines("Petition: " + str(parameters) + "\n")
             try:
-                f.writelines("By User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
+                f.writelines("By User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"] + "\n"))
             except:
-                f.writelines("By User-Agent: Cant Detect UA")
+                f.writelines("By User-Agent: Cant Detect UA\n")
+            f.writelines("ID: " + str(id))
             f.writelines("\n*\n")
 
     def simple_analysis(self, petition, getorpost, ip):  # first blacklist analysis
         for i in getorpost:
             for list in self.blacklist:
                 if getorpost[i] in list:
-                    self.log_attack(petition, getorpost[i], ip)
-                    return True
+                    self.log_attack(petition, getorpost[i],2, ip)
+                    if self.mode == "analysis":
+                        print("[analysis] attack detected, but no blocking")
+                        return False
+                    else:
+                        return True
         return False
 
     def blockIP(self, petition, ip):
@@ -96,8 +112,12 @@ class Analizer:
             ips = fp.readlines()
             for ip_list in ips:
                 if ip_list == ip:
-                    self.log_attack(petition, "Blocked IP", ip)
-                    return True
+                    self.log_attack(petition, "Blocked IP", 3,ip)
+                    if self.mode == "analysis":
+                        print("[analysis] attack detected, but no blocking")
+                        return False
+                    else:
+                        return True
             return False
 
     def verb_analysis(self, petition, ip):  # petition is raw
@@ -105,8 +125,12 @@ class Analizer:
             ",")  # get allowed methods
         if self.parser.get_method(petition) not in allowed:  # if method not allowed
             reason = self.parser.get_method(petition) + " method used "  # print the used verb
-            self.log_attack(petition, reason, ip)  # log it
-            return True  # attack
+            self.log_attack(petition, reason,4, ip)  # log it
+            if self.mode == "analysis":
+                print("[analysis] attack detected, but no blocking")
+                return False
+            else:
+                return True
         return False
 
     def request_analysis(self, data, ip):  # start request analysis
@@ -158,8 +182,12 @@ class Analizer:
                     variable]:  # if variable is 175 % bigger of average
                     attack = "'" + str(variables_dict[variable]) + "' is too big, average: " + str(
                         length_dict[variable]) + " digits"
-                    self.log_attack(petition, attack, ip)
-                    return True
+                    self.log_attack(petition, attack, 5, ip)
+                    if self.mode == "analysis":
+                        print("[analysis] attack detected, but no blocking")
+                        return False
+                    else:
+                        return True
                 else:
                     new_len = (len(variables_dict[variable]) + length_dict[variable]) / 2
                     new_len = int(new_len)
