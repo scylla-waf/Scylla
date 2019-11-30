@@ -142,19 +142,21 @@ def config(request):
             djangoport = line.split(" ")[2]
         elif line.split(" ")[0] == "secret_key":
             secret_key = line.split(" ")[2]
+        elif line.split(" ")[0] == "mode":
+            mode = line.split(" ")[2]
 
     formscylla = ScyllaForm(request.POST or None,
                             initial={'proxyhost': proxyhost, 'proxyport': proxyport, 'server_addr': server_addr,
                                      'server_port': server_port, 'djangoport': djangoport,
-                                     "secret_key": secret_key[1:-2]})
+                                     "secret_key": secret_key[1:-2],"mode": mode})
     if formscylla.is_valid():
         manf = open("config/scylla.conf", "w")
         seq = ["# proxy info ( default in localhost:4440 )\n\n", "proxyhost = " + formscylla.cleaned_data['proxyhost'],
                "\nproxyport = " + formscylla.cleaned_data['proxyport'],
                "\n\n# server info (default)\nserver_addr = " + formscylla.cleaned_data['server_addr'],
-               "\nserver_port = " + formscylla.cleaned_data['server_port'], "\n\n# djando info\nsecret_key='",
+               "\nserver_port = " + formscylla.cleaned_data['server_port'], "\n\n# djando info\nsecret_key = '",
                formscylla.cleaned_data['secret_key'], "'\nHTTPport = " + formscylla.cleaned_data['djangoport'],
-               "\n\n# max bytes received from server\nmaxlength = 10000", ]
+               "\n\n# max bytes received from server\nmaxlength = 10000\n\n# mode ( change to deffense for block )\n\nmode = " + formscylla.cleaned_data['mode'], ]
         manf.writelines(seq)
         manf.close()
     

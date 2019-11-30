@@ -98,7 +98,13 @@ nav .left span{
 }
 .filters form{
     margin-top: 2%;
-    width: 20%;
+    padding-left: 2%;
+    width: auto !important;
+}
+.filters form button{
+    background: #47494f;
+    color: white;
+    border-color: #47494f;
 }
 /* Forms */
 .forms{
