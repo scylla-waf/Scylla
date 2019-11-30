@@ -82,7 +82,7 @@ class Analizer:
         except:
             pass
         if "GET" not in self.parser.get_method(petition):
-            line = petition.decode("utf-8").split("\r\n")[:1] + " "
+            line = petition.decode("utf-8").split("\r\n")[:1]
         else:
             line = ""
         print("Petition: " + str(line) +  str(parameters))
@@ -92,7 +92,7 @@ class Analizer:
             f.writelines("Detected: " + str(attack) + "\n")
             f.writelines("IP: " + str(ip) + "\n")
             if "GET" not in self.parser.get_method(petition):
-                line = petition.decode("utf-8").split("\r\n")[:1] + " "
+                line = petition.decode("utf-8").split("\r\n")[:1]
             else:
                 line = ""
             print("Petition: " + str(line) + str(parameters))
