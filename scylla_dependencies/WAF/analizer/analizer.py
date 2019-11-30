@@ -81,13 +81,21 @@ class Analizer:
             print("User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"]))
         except:
             pass
-        print("Petition: " + str(parameters))
+        if "GET" not in self.parser.get_method(petition):
+            line = petition.decode("utf-8").split("\r\n")[:1] + " "
+        else:
+            line = ""
+        print("Petition: " + str(line) +  str(parameters))
         print("ID: " + str(id))
         print("time: " + str(time.ctime())) # 'Mon Oct 18 13:35:29 2010')
         with open("scylla_dependencies/WAF/log/petition.log", "a") as f:
             f.writelines("Detected: " + str(attack) + "\n")
             f.writelines("IP: " + str(ip) + "\n")
-            f.writelines("Petition: " + str(parameters) + "\n")
+            if "GET" not in self.parser.get_method(petition):
+                line = petition.decode("utf-8").split("\r\n")[:1] + " "
+            else:
+                line = ""
+            print("Petition: " + str(line) + str(parameters))
             try:
                 f.writelines("By User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"] + "\n"))
             except:
