@@ -2,6 +2,7 @@
 
 import ast  # for eval() dict
 from urllib.parse import unquote
+import time
 
 from scylla import Config
 from scylla_dependencies.WAF.intelligence.intelligence import *
@@ -82,7 +83,7 @@ class Analizer:
             pass
         print("Petition: " + str(parameters))
         print("ID: " + str(id))
-
+        print("time: " + str(time.ctime())) # 'Mon Oct 18 13:35:29 2010')
         with open("scylla_dependencies/WAF/log/petition.log", "a") as f:
             f.writelines("Detected: " + str(attack) + "\n")
             f.writelines("IP: " + str(ip) + "\n")
@@ -91,7 +92,8 @@ class Analizer:
                 f.writelines("By User-Agent: " + str(self.parser.parse_headers(petition)["User-Agent"] + "\n"))
             except:
                 f.writelines("By User-Agent: Cant Detect UA\n")
-            f.writelines("ID: " + str(id))
+            f.writelines("ID: " + str(id) + "\n")
+            f.writelines("time: " + str(time.ctime()))
             f.writelines("\n*\n")
 
     def simple_analysis(self, petition, getorpost, ip):  # first blacklist analysis
@@ -196,7 +198,6 @@ class Analizer:
             else:
                 new_len = int(len(variables_dict[variable]))
                 length_dict[variable] = new_len  # if variable is new add it to file
-        print("[DEBUG] Saving : " + str(length_dict))
         with open("scylla_dependencies/WAF/log/len_block.log", "w+") as f:
             f.writelines(str(length_dict))
         return False
@@ -220,3 +221,4 @@ class Analizer:
 
         else:  # analyze response
             return received  # response analysis
+
