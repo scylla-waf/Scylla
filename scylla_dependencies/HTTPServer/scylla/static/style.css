@@ -91,6 +91,15 @@ nav .left span{
     text-align: center;
     margin-top: 5%;
 }
+.filters{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.filters form{
+    margin-top: 2%;
+    width: 20%;
+}
 /* Forms */
 .forms{
     display: flex;

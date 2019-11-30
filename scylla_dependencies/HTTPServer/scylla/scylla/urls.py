@@ -25,4 +25,11 @@ urlpatterns = [
     path('logout', views.logout_view),
     path('index.html', views.index),
     path('config', views.config),
+    path('filter_by_variable_type', views.filter_by_variable_type),
+    path('filter_by_blacklist', views.filter_by_blacklist),
+    path('filter_by_blockip', views.filter_by_blockip),
+    path('filter_by_method_analysis', views.filter_by_method_analysis),
+    path('filter_by_blockbylength', views.filter_by_blockbylength),
+    path('all', views.index),
+    
 ]

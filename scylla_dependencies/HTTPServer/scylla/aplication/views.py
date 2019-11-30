@@ -6,8 +6,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 from .forms import ScyllaForm
-from .models import Request
-
+from .models import Request, Variable
 
 # Create your views here.
 def index(request):
@@ -18,11 +17,11 @@ def index(request):
         for f in manf:
             if f.rstrip('\n') == "*":
                 if "GET" in " ".join(objetos[2].split(":")[1:])[2:]:
-                    petition = Request(ip=objetos[1].split(" ")[1], petition=" ".join(objetos[2].split(":")[1:])[3:-2],
-                                       detection=objetos[3].split(":")[1])
+                    petition = Request(ip=objetos[1].split(" ")[1].strip(), petition=" ".join(objetos[2].split(":")[1:])[3:-2].strip(),
+                                       detection=objetos[3].split(":")[1].strip(),type_id=objetos[4].split(":")[1].strip())
                 else:
-                    petition = Request(ip=objetos[1].split(" ")[1], petition=" ".join(objetos[2].split(":")[1:]),
-                                       detection=objetos[3].split(":")[1])
+                    petition = Request(ip=objetos[1].split(" ")[1].strip(), petition=" ".join(objetos[2].split(":")[1:]).strip(),
+                                       detection=objetos[3].split(":")[1].strip(),type_id=objetos[4].split(":")[1].strip())
                 petition.save()
                 objetos = []
             else:
@@ -52,6 +51,77 @@ def index(request):
             "post_petitions": post_petitions,
             "put_petitions": put_petitions,
             "other_petitions": other_petitions,
+        }
+        return render(request, "index.html", context)
+    return redirect('/')
+
+def all(request):
+    if request.user.is_authenticated:
+        return redirect(request, "index.html", context)
+    return redirect('/')
+
+def filter_by_variable_type(request):
+    if request.user.is_authenticated:
+        petitions = Request.objects.filter(type_id="1")
+        page = request.GET.get('page')
+        paginator = Paginator(petitions, 10)
+        petitions = paginator.get_page(page)
+
+        context = {
+            "petitions": petitions,
+        }
+        return render(request, "index.html", context)
+    return redirect('/')
+
+
+def filter_by_blacklist(request):
+    if request.user.is_authenticated:
+        petitions = Request.objects.filter(type_id="2")
+        page = request.GET.get('page')
+        paginator = Paginator(petitions, 10)
+        petitions = paginator.get_page(page)
+
+        context = {
+            "petitions": petitions,
+        }
+        return render(request, "index.html", context)
+    return redirect('/')
+
+def filter_by_blockip(request):
+    if request.user.is_authenticated:
+        petitions = Request.objects.filter(type_id="3")
+        page = request.GET.get('page')
+        paginator = Paginator(petitions, 10)
+        petitions = paginator.get_page(page)
+
+        context = {
+            "petitions": petitions,
+        }
+        return render(request, "index.html", context)
+    return redirect('/')
+
+def filter_by_method_analysis(request):
+    if request.user.is_authenticated:
+        petitions = Request.objects.filter(type_id="4")
+        page = request.GET.get('page')
+        paginator = Paginator(petitions, 10)
+        petitions = paginator.get_page(page)
+
+        context = {
+            "petitions": petitions,
+        }
+        return render(request, "index.html", context)
+    return redirect('/')
+
+def filter_by_blockbylength(request):
+    if request.user.is_authenticated:
+        petitions = Request.objects.filter(type_id="5")
+        page = request.GET.get('page')
+        paginator = Paginator(petitions, 10)
+        petitions = paginator.get_page(page)
+
+        context = {
+            "petitions": petitions,
         }
         return render(request, "index.html", context)
     return redirect('/')
@@ -87,17 +157,10 @@ def config(request):
                "\n\n# max bytes received from server\nmaxlength = 10000", ]
         manf.writelines(seq)
         manf.close()
-
-    manf = open("config/variables.conf")
-    for line in manf:
-        if line.split("=")[0] == "string":
-            string = line.split("=")[1]
-        elif line.split("=")[0] == "numeric":
-            numeric = line.split("=")[1]
-        elif line.split("=")[0] == "strange":
-            strange = line.split("=")[1]
+    
 
     # Miramos los objetos variables para ver los tipos de variable que hay y sus variables
+
 
     context = {
         "formscylla": formscylla,

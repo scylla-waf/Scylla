@@ -40,6 +40,26 @@
 </script>
 <div class="container2">
     <div class="left_side">
+        <div class="filters">
+          <form action='all' method='GET'>
+              <button type='submit'>All</button>
+          </form>
+          <form action='filter_by_variable_type' method='GET'>
+              <button type='submit'>Filter by Variable Type</button>
+          </form>
+          <form action='filter_by_blacklist' method='GET'>
+              <button type='submit'>Filter by Blacklist</button>
+          </form>
+          <form action='filter_by_blockip' method='GET'>
+              <button type='submit'>Filter by Block IP</button>
+          </form>
+          <form action='filter_by_method_analysis' method='GET'>
+              <button type='submit'>Filter by Method Analysis</button>
+          </form>
+          <form action='filter_by_blockbylength' method='GET'>
+              <button type='submit'>Filter by Block By Length</button>
+          </form>
+        </div>
         <h2>Bad Petitions</h2>
         <div class="all_petitions">
             <div class="petitions">
