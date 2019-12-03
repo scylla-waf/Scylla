@@ -3,3 +3,4 @@ django-secure
 django-secure
 django-sslserver
 seaborn
+sklearn
